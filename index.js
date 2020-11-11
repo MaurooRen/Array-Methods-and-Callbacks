@@ -92,6 +92,8 @@ function getWinnersByYear(data, getYearsCB, getWinnersCB) {
 }
 
 
+
+
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
@@ -112,10 +114,21 @@ Create a function called `getCountryWins` that takes the parameters `data` and `
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
+function getCountryWins(data, initials) {
+    const finals = getFinals(data)
+    const winners = []
 
-    /* code here */
 
+    const cups = finals.reduce((accumulator, item) => {
+        if(item["Home Team Initials"] === initials && item["Home Team Goals"] > item["Away Team Goals"]) {
+            accumulator++
+        } else if (item["Away Team Initials"] === initials && item["Away Team Goals"] > item["Home Team Goals"]) {
+            accumulator++
+        }
+
+        return accumulator
+    }, 0)
+    return cups
 }
 
 
